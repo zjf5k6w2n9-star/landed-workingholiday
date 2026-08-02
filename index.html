@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LANDED — 勝負は、初日。</title>
+<meta name="description" content="トロントのワーキングホリデー生活立ち上げサポート。SIN・銀行口座・住まいの段取りを最短で。最悪でもDay3終了時点で整わなければ全額返金。">
+<link rel="canonical" href="https://landed-workingholiday.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LANDED">
+<meta property="og:title" content="LANDED — 勝負は、初日。">
+<meta property="og:description" content="トロントのワーキングホリデー生活立ち上げサポート。SIN・銀行口座・住まいの段取りを最短で。最悪でもDay3終了時点で整わなければ全額返金。">
+<meta property="og:url" content="https://landed-workingholiday.netlify.app/">
+<meta property="og:image" content="https://landed-workingholiday.netlify.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LANDED — 勝負は、初日。">
+<meta name="twitter:description" content="トロントのワーキングホリデー生活立ち上げサポート。SIN・銀行口座・住まいの段取りを最短で。">
+<meta name="twitter:image" content="https://landed-workingholiday.netlify.app/og-image.jpg">
+<meta name="theme-color" content="#13213D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@500;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -103,8 +120,9 @@
   .price-card li:first-child{border-top:none;}
   .price-card li::before{content:'✓'; position:absolute; left:0; color:var(--green-ok); font-weight:700;}
   .slots{margin-top:18px; font-size:0.76rem; color:#6b6b72; display:flex; align-items:center; gap:8px;}
+  .slots .slots-count{font-weight:600; color:var(--indigo); white-space:nowrap;}
   .slots .bar{flex-grow:1; height:5px; background:var(--line); border-radius:3px; overflow:hidden;}
-  .slots .bar span{display:block; height:100%; background:var(--ttc-red);}
+  .slots .bar span{display:block; height:100%; background:var(--ttc-red); transition:width 0.4s ease;}
   .plan-btn{
     margin-top:20px; display:block; text-align:center; background:var(--indigo); color:#fff;
     text-decoration:none; padding:12px 18px; font-size:0.86rem; font-weight:600; border-radius:2px;
@@ -152,6 +170,22 @@
   .contact-row{display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;}
   .contact-chip{border:1px solid rgba(234,237,242,0.35); padding:13px 22px; border-radius:2px; color:#fff; text-decoration:none; font-size:0.9rem; font-weight:500; transition:background 0.15s ease, border-color 0.15s ease;}
   .contact-chip:hover{background:rgba(234,237,242,0.08); border-color:var(--brass);}
+
+  .contact-form{margin-top:40px; max-width:480px; border-top:1px dashed rgba(234,237,242,0.3); padding-top:32px;}
+  .contact-form .hp-field{position:absolute; left:-9999px;}
+  .cf-row{margin-bottom:18px; display:flex; flex-direction:column; gap:6px;}
+  .cf-row label{font-size:0.8rem; color:rgba(234,237,242,0.75);}
+  .cf-row input, .cf-row select, .cf-row textarea{
+    font-family:'Inter','Noto Sans JP',sans-serif; font-size:0.92rem;
+    background:rgba(234,237,242,0.06); border:1px solid rgba(234,237,242,0.3); color:#fff;
+    padding:11px 14px; border-radius:2px; resize:vertical;
+  }
+  .cf-row input:focus, .cf-row select:focus, .cf-row textarea:focus{outline:2px solid var(--brass); outline-offset:1px; border-color:var(--brass);}
+  .cf-row select option{color:#1B1B1E;}
+  #cf-submit{margin-top:4px;}
+  .cf-status{margin-top:14px; font-size:0.85rem; min-height:1.2em;}
+  .cf-status.ok{color:#8fd0a8;}
+  .cf-status.err{color:#e8917f;}
 
   footer{padding:40px 0 50px; font-size:0.78rem; color:#6b6b72; border-top:1px solid var(--line);}
   footer .wrap{display:flex; flex-direction:column; gap:8px;}
@@ -283,7 +317,7 @@
           <li><span lang-jp>レジュメ印刷・到着時にお渡し(無料・20枚まで)</span><span lang-en>Free printing, handed to you on arrival (up to 20 sheets)</span></li>
           <li><span lang-jp>仕事探しサポート(実際の面接質問共有・求人情報・キャリア相談)<strong style="color:var(--green-ok);">・無料オプション</strong></span><span lang-en>Job-search support (real interview Q&amp;A shared, job info, career guidance) <strong style="color:var(--green-ok);">— free option</strong></span></li>
         </ul>
-        <div class="slots"><span lang-jp>残り枠</span><span lang-en>Slots left</span><div class="bar"><span style="width:90%"></span></div></div>
+        <div class="slots" data-slot="startup"><span lang-jp>残り枠</span><span lang-en>Slots left</span><span class="slots-count"></span><div class="bar"><span style="width:0%"></span></div></div>
         <a class="plan-btn" href="https://line.me/ti/p/kXYo6Cddy9" target="_blank" rel="noopener"><span lang-jp>このプランで相談する</span><span lang-en>Ask about this plan</span></a>
       </div>
 
@@ -303,7 +337,7 @@
           <li><span lang-jp>契約前の詐欺回避チェック</span><span lang-en>Pre-lease scam check</span></li>
           <li><span lang-jp>単体で頼むより$10お得</span><span lang-en>$10 less than booking separately</span></li>
         </ul>
-        <div class="slots"><span lang-jp>残り枠</span><span lang-en>Slots left</span><div class="bar"><span style="width:80%"></span></div></div>
+        <div class="slots" data-slot="allin"><span lang-jp>残り枠</span><span lang-en>Slots left</span><span class="slots-count"></span><div class="bar"><span style="width:0%"></span></div></div>
         <a class="plan-btn" href="https://line.me/ti/p/kXYo6Cddy9" target="_blank" rel="noopener"><span lang-jp>このプランで相談する</span><span lang-en>Ask about this plan</span></a>
       </div>
 
@@ -319,7 +353,7 @@
           <li><span lang-jp>トロント市内の内見同行(2-3件)</span><span lang-en>2-3 accompanied viewings in Toronto</span></li>
           <li><span lang-jp>契約前の詐欺回避チェック</span><span lang-en>Pre-lease scam check</span></li>
         </ul>
-        <div class="slots"><span lang-jp>残り枠</span><span lang-en>Slots left</span><div class="bar"><span style="width:90%"></span></div></div>
+        <div class="slots" data-slot="housing"><span lang-jp>残り枠</span><span lang-en>Slots left</span><span class="slots-count"></span><div class="bar"><span style="width:0%"></span></div></div>
         <a class="plan-btn" href="https://line.me/ti/p/kXYo6Cddy9" target="_blank" rel="noopener"><span lang-jp>このプランで相談する</span><span lang-en>Ask about this plan</span></a>
       </div>
     </div>
@@ -393,6 +427,36 @@
       <a class="contact-chip" href="https://www.tiktok.com/@kim_shun_21" target="_blank" rel="noopener">TikTok @kim_shun_21</a>
       <a class="contact-chip" href="https://line.me/ti/p/kXYo6Cddy9" target="_blank" rel="noopener">LINE</a>
     </div>
+
+    <form id="contact-form" class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hp-field"><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="cf-row">
+        <label for="cf-name"><span lang-jp>お名前</span><span lang-en>Name</span></label>
+        <input id="cf-name" name="name" type="text" required>
+      </div>
+      <div class="cf-row">
+        <label for="cf-email"><span lang-jp>メールアドレス</span><span lang-en>Email</span></label>
+        <input id="cf-email" name="email" type="email" required>
+      </div>
+      <div class="cf-row">
+        <label for="cf-plan"><span lang-jp>ご興味のあるプラン</span><span lang-en>Plan you're interested in</span></label>
+        <select id="cf-plan" name="plan">
+          <option value="未定/Not sure yet"><span lang-jp>まだ決めていない</span></option>
+          <option value="スタートアップパック/Startup Pack">Startup Pack</option>
+          <option value="住まいパック/Housing Pack">Housing Pack</option>
+          <option value="オールインパック/All-In Pack">All-In Pack</option>
+        </select>
+      </div>
+      <div class="cf-row">
+        <label for="cf-message"><span lang-jp>メッセージ</span><span lang-en>Message</span></label>
+        <textarea id="cf-message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" id="cf-submit">
+        <span lang-jp>送信する</span><span lang-en>Send</span>
+      </button>
+      <p class="cf-status" id="cf-status" role="status"></p>
+    </form>
   </div>
 </section>
 
@@ -404,6 +468,20 @@
 </footer>
 
 <script>
+  // モニター残り枠 — ここの remaining の数字だけ書き換えれば表示・バーが自動更新されます
+  const SLOTS = {
+    startup: { remaining: 9, total: 10 },
+    allin:   { remaining: 4, total: 5 },
+    housing: { remaining: 9, total: 10 },
+  };
+  document.querySelectorAll('.slots[data-slot]').forEach(el => {
+    const info = SLOTS[el.dataset.slot];
+    if(!info) return;
+    const pct = Math.max(0, Math.min(100, (info.remaining / info.total) * 100));
+    el.querySelector('.bar span').style.width = pct + '%';
+    el.querySelector('.slots-count').textContent = `${info.remaining} / ${info.total}`;
+  });
+
   const html = document.documentElement;
   const btnJp = document.getElementById('btn-jp');
   const btnEn = document.getElementById('btn-en');
@@ -421,6 +499,32 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:0.15});
   revealEls.forEach(el=>io.observe(el));
+
+  const cfForm = document.getElementById('contact-form');
+  const cfStatus = document.getElementById('cf-status');
+  const cfSubmit = document.getElementById('cf-submit');
+  cfForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    cfSubmit.disabled = true;
+    cfStatus.className = 'cf-status';
+    cfStatus.textContent = '';
+    const body = new URLSearchParams(new FormData(cfForm)).toString();
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
+      .then(() => {
+        cfStatus.classList.add('ok');
+        cfStatus.textContent = html.getAttribute('data-lang') === 'en'
+          ? 'Thanks — your message has been sent. We\'ll get back to you soon.'
+          : '送信しました。追ってご連絡します。';
+        cfForm.reset();
+      })
+      .catch(() => {
+        cfStatus.classList.add('err');
+        cfStatus.textContent = html.getAttribute('data-lang') === 'en'
+          ? 'Something went wrong. Please try LINE or TikTok instead.'
+          : '送信に失敗しました。お手数ですがLINEまたはTikTokからご連絡ください。';
+      })
+      .finally(() => { cfSubmit.disabled = false; });
+  });
 </script>
 
 </body>
