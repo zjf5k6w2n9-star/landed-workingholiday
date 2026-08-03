@@ -46,7 +46,7 @@
 
 ## 連絡先
 - TikTok: @kim_shun_21
-- LINE: https://line.me/ti/p/kXYo6Cddy9
+- LINE公式アカウント: https://line.me/R/ti/p/@429wdrzo
 
 ## 法的に気をつけている/確認中の点
 - 移民・ビザに関する法的助言はしない(RCIC/弁護士の領域と明確に線引き、フッターに免責文言あり)
